@@ -1,35 +1,137 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
-/* unvisited link (未造訪：黃字) */
-a:link {
-  color: yellow;
-  text-decoration: underline;
-}
+    <title>JAZZ NIGHT 2026</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #fcf8f2;
+            margin: 20px;
+        }
 
-/* visited link (已造訪：灰字) */
-a:visited {
-  color: grey;
-  text-decoration: underline;
-}
+        /* 頂部標題 */
+        h1 {
+            color: #800000;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
 
-/* mouse over link (滑鼠移上去) */
-a:hover {
-  color: red;
-}
+        .subtitle {
+            font-style: italic;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
 
-/* selected link (點擊瞬間：粉紅字 + 黃底) */
-a:active {
-  color: pink;
-  background-color: yellow;
-  text-decoration: underline;
-}
-</style>
+        .date-time {
+            color: #800000;
+            font-weight: bold;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* 海報圖片 */
+        .poster {
+            width: 200px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* 區塊標題（帶米褐色背景條） */
+        .section-header {
+            background-color: #f3e5d8;
+            color: #800000;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 4px 8px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* 內文文字與顏色設定 */
+        p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .bold-red {
+            color: #800000;
+            font-weight: bold;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+        }
+
+        .special-price {
+            color: #800000;
+            font-weight: bold;
+        }
+
+        .deleted-time {
+            color: #800000;
+            text-decoration: line-through;
+        }
+
+        .inserted-time {
+            color: green;
+            text-decoration: underline;
+        }
+
+        /* 聯絡資訊方塊（淡黃色背景） */
+        .contact-box {
+            background-color: #ffffdd;
+            padding: 8px;
+            margin-top: 5px;
+            font-style: italic;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .contact-title {
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        a {
+            color: blue;
+        }
+    </style>
 </head>
 <body>
 
-<p>Mouse over and click the link: <a href="https://www.w3schools.com">w3schools.com</a></p>
+    <h1>JAZZ NIGHT 2026</h1>
+    <p class="subtitle">Live Music & Dance</p>
+
+    <div class="date-time">
+        Saturday, October 10, 2026<br>
+        7:30 PM – 10:30 PM
+    </div>
+
+    <!-- 圖片來源請替換為你的圖片檔案名稱或網址 -->
+    <img src="jazz_night_poster.jpg" alt="Jazz Night Poster" class="poster">
+
+    <div class="section-header">About the Event</div>
+
+    <p>Join us for an evening of <span class="bold-red">live jazz, dancing, and good music.</span></p>
+
+    <p>Ticket: <span class="original-price">$30</span></p>
+    <p class="special-price">Special Price: $20</p>
+
+    <p>We originally planned to start at <del class="deleted-time">8:00 PM</del> <ins class="inserted-time">7:30 PM</ins>.</p>
+
+    <div class="section-header">More Information</div>
+
+    <p><a href="#">Visit our website</a></p>
+    <p><a href="mailto:jazznight@example.com">Email us</a></p>
+    <p><a href="#">Call us</a></p>
+
+    <div class="section-header">Contact</div>
+
+    <div class="contact-box">
+        <span class="contact-title">Jazz Night Taipei</span><br>
+        123 Music Street, Taipei<br>
+        <a href="mailto:jazznight@example.com">jazznight@example.com</a>
+    </div>
 
 </body>
 </html>
