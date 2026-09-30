@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 3 - Navigation Bar</title>
+    <style>
+        /* 移除清單預設邊距與符號 */
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #008000; /* 全局導覽列底色 */
+        }
+
+        /* 讓項目水平排列 */
+        li {
+            float: left;
+        }
+
+        /* 導覽列超連結基本樣式 */
+        li a {
+            display: block;
+            color: #ffff00; /* 黃色文字 */
+            text-align: center;
+            padding: 14px 20px;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            
+            /* 需求：白色波浪底線 (Wavy white underline) */
+            text-decoration-line: underline;
+            text-decoration-style: wavy;
+            text-decoration-color: white;
+        }
+
+        /* 1. Normal status (一般/未造訪狀態背景色) */
+        li a:link, li a:visited {
+            background-color: #008000; /* 第一種背景色：綠色 */
+        }
+
+        /* 2. Mouse move over it (滑鼠懸停狀態背景色) */
+        li a:hover {
+            background-color: #1e1035; /* 第二種背景色：深紫/深黑 */
+        }
+
+        /* 3. Click on it (點擊瞬間狀態背景色) */
+        li a:active {
+            background-color: #d97706; /* 第三種背景色：橘褐色/黃色 */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 使用無序清單建立 5 個項目的導覽列 -->
+    <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="news/news.html">News</a></li>
+        <li><a href="contact/contact.html">Contact</a></li>
+        <li><a href="schedule/schedule.html">Schedule</a></li>
+        <li><a href="about/about.html">About</a></li>
+    </ul>
+
+</body>
+</html>
