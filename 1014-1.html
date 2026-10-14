@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 1 - Image Overlay Fade</title>
+    <style>
+        /* 1. 容器設定 */
+        .container {
+            position: relative;
+            width: 250px;
+            height: 250px;
+            /* 需求 1: 圓形邊框 */
+            border-radius: 50%;
+            overflow: hidden; /* 確保懸停遮罩不會超出圓形外框 */
+        }
+
+        /* 圖片樣式 */
+        .image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 2. 懸停遮罩層 */
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            width: 100%;
+            opacity: 0;
+            transition: .5s ease;
+            /* 需求 2: 參考 Color Hunt 選擇紫紅色背景 */
+            background-color: #a8518a;
+            /* 需求 1: 遮罩同步設為圓形 */
+            border-radius: 50%;
+        }
+
+        /* 滑鼠懸停時顯示遮罩 */
+        .container:hover .overlay {
+            opacity: 1;
+        }
+
+        /* 3. 文字樣式與位置調整 */
+        .text {
+            /* 需求 2: 文字顏色（米白/淡粉） */
+            color: #fbe3e8;
+            font-size: 20px;
+            font-family: 'Georgia', serif;
+            position: absolute;
+            /* 需求 3: 將文字位置移至偏下方 (非預設正中央 50%) */
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Task 1 - Image Overlay Fade</h2>
+
+    <div class="container">
+        <img src="image.png" alt="Brad Pitt" class="image">
+        <div class="overlay">
+            <div class="text">Brad Pitt</div>
+        </div>
+    </div>
+
+</body>
+</html>

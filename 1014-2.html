@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jazz After Dark - Hero Section</title>
+    <style>
+        /* 基礎重置 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif, sans-serif;
+            background-color: #f7f5f0;
+        }
+
+        /* 1. Hero 主容器：設定背景圖與 Flex 垂直置中 */
+        .hero {
+            position: relative;
+            height: 540px;
+            /* 請替換為你的圖片檔名或路徑 */
+            background-image: url("jazz.jpg");
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 2. 暗色漸層遮罩：從左（深色襯托文字）到右（淺色保留圖片） */
+        .overlay {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(
+                to right,
+                rgba(0, 0, 0, 0.85),
+                rgba(0, 0, 0, 0.1)
+            );
+        }
+
+        /* 3. 前景內容：設定為 relative 確保浮在遮罩上層 */
+        .hero-content {
+            position: relative;
+            color: white;
+            padding: 60px;
+            max-width: 550px;
+        }
+
+        .hero-subtitle {
+            font-size: 11px;
+            letter-spacing: 2px;
+            color: #d9a05b;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            font-family: Arial, sans-serif;
+        }
+
+        .hero-content h1 {
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .hero-content p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+        }
+
+        /* 按鈕樣式 */
+        .hero-content .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #d9a05b;
+            color: #000000;
+            text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-content .btn:hover {
+            background-color: #b88242;
+        }
+
+        /* 下方副標題區塊 */
+        .sub-bar {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #f7f5f0;
+            color: #333333;
+        }
+
+        .sub-bar h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .sub-bar p {
+            font-size: 14px;
+            color: #666666;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero 主區塊 -->
+    <section class="hero">
+        <div class="overlay"></div>
+        
+        <div class="hero-content">
+            <div class="hero-subtitle">Live Music • Friday 8 PM</div>
+            <h1>Jazz<br>After<br>Dark.</h1>
+            <p>An intimate evening of swinging rhythms, warm lights, and unforgettable live music.</p>
+            <a href="#" class="btn">EXPLORE THE EVENT &rarr;</a>
+        </div>
+    </section>
+
+    <!-- 下方區塊 -->
+    <div class="sub-bar">
+        <h2>Let the music move you.</h2>
+        <p>Live Jazz • Good company • A night to remember</p>
+    </div>
+
+</body>
+</html>
