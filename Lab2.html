@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TOKYO - A Visual Journey Through Japan</title>
     <style>
-        /* 基礎樣式重置 (修復語法) */
+        /* 基礎樣式重置 */
         * {
             margin: 0;
             padding: 0;
@@ -210,7 +210,7 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
         }
 
-        /* ================= 03 / PHOTO JOURNAL: 3 圖懸停卡片排版 ================= */
+        /* ================= 03 / PHOTO JOURNAL ================= */
         .section-top-row {
             display: flex;
             justify-content: space-between;
@@ -227,14 +227,12 @@
             line-height: 1.4;
         }
 
-        /* 3 張圖片並排容器 */
         .gallery-grid {
             display: flex;
             gap: 20px;
             margin-bottom: 15px;
         }
 
-        /* 單張懸停卡片容器 */
         .gallery-item {
             position: relative;
             flex: 1;
@@ -250,7 +248,6 @@
             display: block;
         }
 
-        /* 淡入遮罩層 */
         .gallery-item .overlay {
             position: absolute;
             top: 0;
@@ -283,6 +280,57 @@
             font-size: 12px;
             color: #888888;
             margin-top: 15px;
+        }
+
+        /* ================= PART 4: Footer ================= */
+        .footer {
+            background-color: #2b3031; /* 深暗色背景 */
+            padding: 60px 0;
+            color: #ffffff;
+        }
+
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 中間訊息置中 */
+        .footer-center {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: 'Georgia', serif;
+            font-size: 32px;
+            font-weight: normal;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .footer-subtitle {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+            color: #a0a5a6;
+            letter-spacing: 0.5px;
+        }
+
+        /* 右側 BACK TO TOP 按鈕 */
+        .back-to-top {
+            font-family: Arial, sans-serif;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.5px;
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+
+        .back-to-top:hover {
+            opacity: 0.7;
         }
     </style>
 </head>
@@ -348,7 +396,6 @@
             <div class="section-header">02 / NEIGHBORHOODS</div>
             <h2 class="section-title">Slow down. Look closer.</h2>
             
-            <!-- reverse 類別讓圖片在左、文字在右 -->
             <div class="section-body reverse">
                 <div class="text-column">
                     <div class="sub-header">THE QUIETER SIDE</div>
@@ -381,7 +428,6 @@
                 </div>
             </div>
 
-            <!-- 三張並排且帶有 Fade Overlay 的圖片 -->
             <div class="gallery-grid">
                 <div class="gallery-item">
                     <img src="Lab2_3.jpeg" alt="City View 1">
@@ -410,6 +456,17 @@
             </div>
         </div>
     </section>
+
+    <!-- PART 4: Footer 頁尾區塊 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-center">
+                <h2 class="footer-title">Keep exploring.</h2>
+                <p class="footer-subtitle">A student web design project · HTML & CSS</p>
+            </div>
+            <a href="#top" class="back-to-top">↑ BACK TO TOP</a>
+        </div>
+    </footer>
 
 </body>
 </html>

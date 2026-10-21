@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Practice - Weekly Schedule Table</title>
+    <style>
+        table {
+            width: 100%;
+            max-width: 950px;
+            font-family: Arial, sans-serif;
+            font-size: 13px;
+            /* 使用白邊作為格子間格 (Cellspacing) */
+            border-collapse: separate;
+            border-spacing: 2px;
+            background-color: #ffffff;
+            margin: 20px auto;
+        }
+
+        th, td {
+            padding: 8px; /* Cellpadding 內邊距 */
+            text-align: center;
+            vertical-align: middle;
+            border-radius: 2px;
+        }
+
+        /* 頂部表頭 (Bold) */
+        .header-bg {
+            background-color: #555555;
+            color: #ffffff;
+            font-weight: bold;
+        }
+
+        /* 第一欄 Time */
+        .time-col {
+            background-color: #dcdcdc;
+            color: #555555;
+            font-weight: bold;
+            width: 80px;
+        }
+
+        /* 一般灰底儲存格 */
+        .bg-gray {
+            background-color: #e8e8e8;
+            color: #666666;
+        }
+
+        /* 課程 1：Business (淺綠色) */
+        .bg-green {
+            background-color: #d2e4b0;
+            color: #4a5d29;
+        }
+
+        /* 課程 2：Physics (橘黃色) */
+        .bg-orange {
+            background-color: #fcd7b6;
+            color: #8c532b;
+        }
+
+        /* 課程 3：Applied Math (淺藍色) */
+        .bg-blue {
+            background-color: #dbe7f3;
+            color: #425b73;
+        }
+    </style>
+</head>
+<body>
+
+    <h2 style="text-align: center; font-family: Arial;">Practice</h2>
+
+    <table>
+        <!-- 表頭列：一週七天 -->
+        <tr>
+            <th class="header-bg">Time</th>
+            <th class="header-bg">Mon</th>
+            <th class="header-bg">Tue</th>
+            <th class="header-bg">Wed</th>
+            <th class="header-bg">Thu</th>
+            <th class="header-bg">Fri</th>
+            <th class="header-bg">Sat</th>
+            <th class="header-bg">Sun</th>
+        </tr>
+
+        <!-- 7:30 AM -->
+        <tr>
+            <td class="time-col">7:30 AM</td>
+            <td class="bg-gray">Breakfast</td>
+            <td class="bg-gray">Breakfast</td>
+            <td class="bg-gray">Breakfast</td>
+            <td class="bg-gray">Breakfast</td>
+            <td class="bg-gray">Breakfast</td>
+            <td class="bg-gray">Breakfast</td>
+            <td class="bg-gray">Breakfast</td>
+        </tr>
+
+        <!-- 8:00 AM -->
+        <tr>
+            <td class="time-col">8:00 AM</td>
+            <!-- Mon: 8:00-9:00 (跨 2 列) -->
+            <td rowspan="2" class="bg-green">
+                Business: Lecture<br>Bldg B, Rm 256
+            </td>
+            <!-- Tue: 8:00-9:30 (跨 3 列) -->
+            <td rowspan="3" class="bg-orange">
+                Physics: Lab<br>Bldg J, Rm 309
+            </td>
+            <!-- Wed: 8:00-9:00 (跨 2 列) -->
+            <td rowspan="2" class="bg-green">
+                Business: Lecture<br>Bldg B, Rm 256
+            </td>
+            <!-- Thu: 8:00-9:30 (跨 3 列) -->
+            <td rowspan="3" class="bg-orange">
+                Physics: Lab<br>Bldg J, Rm 309
+            </td>
+            <!-- Fri: 8:00-9:00 (跨 2 列) -->
+            <td rowspan="2" class="bg-green">
+                Business: Lecture<br>Bldg B, Rm 256
+            </td>
+            <td class="bg-gray">Rest</td>
+            <td class="bg-gray">Rest</td>
+        </tr>
+
+        <!-- 8:30 AM -->
+        <tr>
+            <td class="time-col">8:30 AM</td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+        </tr>
+
+        <!-- 9:00 AM -->
+        <tr>
+            <td class="time-col">9:00 AM</td>
+            <!-- Mon: 9:00-10:00 (跨 2 列) -->
+            <td rowspan="2" class="bg-blue">
+                Applied Math<br>Bldg H, Rm 100
+            </td>
+            <!-- Wed: 9:00-10:00 (跨 2 列) -->
+            <td rowspan="2" class="bg-blue">
+                Applied Math<br>Bldg H, Rm 100
+            </td>
+            <!-- Fri: 9:00-10:00 (跨 2 列) -->
+            <td rowspan="2" class="bg-blue">
+                Applied Math<br>Bldg H, Rm 100
+            </td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+        </tr>
+
+        <!-- 9:30 AM -->
+        <tr>
+            <td class="time-col">9:30 AM</td>
+            <td class="bg-gray"></td> <!-- Tue: 9:30 空白 -->
+            <td class="bg-gray"></td> <!-- Thu: 9:30 空白 -->
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+        </tr>
+
+        <!-- 10:00 AM -->
+        <tr>
+            <td class="time-col">10:00 AM</td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+        </tr>
+
+        <!-- 10:30 AM -->
+        <tr>
+            <td class="time-col">10:30 AM</td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+        </tr>
+
+        <!-- 11:00 AM -->
+        <tr>
+            <td class="time-col">11:00 AM</td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+        </tr>
+
+        <!-- 11:30 AM -->
+        <tr>
+            <td class="time-col">11:30 AM</td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+            <td class="bg-gray"></td>
+        </tr>
+    </table>
+
+</body>
+</html>
