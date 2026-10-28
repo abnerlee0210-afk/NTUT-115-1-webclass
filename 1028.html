@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>Multiplication Table Exercise</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        h2 {
+            margin-bottom: 5px;
+        }
+
+        .subtitle {
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* 表格樣式 */
+        table {
+            border-collapse: collapse;
+            background-color: #ffffff;
+        }
+
+        td {
+            border: 1px solid #cccccc;
+            padding: 10px 14px;
+            text-align: center;
+            font-size: 14px;
+            white-space: nowrap; /* 避免乘法算式被折行 */
+        }
+
+        /* 偶數列淡灰色背景增強易讀性 */
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Multiplication Table</h2>
+    <div class="subtitle">from 2 × 1 to 9 × 9</div>
+
+    <!-- 用來放置動態生成的表格容器 -->
+    <div id="table-container"></div>
+
+    <script>
+        // 建立 table HTML 字串
+        let tableHTML = "<table>";
+
+        // 外層迴圈：控制「列 (Rows)」，從 1 到 9
+        for (let j = 1; j <= 9; j++) {
+            tableHTML += "<tr>";
+
+            // 內層迴圈：控制「欄 (Columns)」，從 2 到 9
+            for (let i = 2; i <= 9; i++) {
+                let result = i * j;
+                // 拼接每一個儲存格 <td>
+                tableHTML += `<td>${i} × ${j} = ${result}</td>`;
+            }
+
+            tableHTML += "</tr>";
+        }
+
+        tableHTML += "</table>";
+
+        // 將生成的表格渲染至 HTML 頁面中
+        document.getElementById("table-container").innerHTML = tableHTML;
+    </script>
+
+</body>
+</html>
