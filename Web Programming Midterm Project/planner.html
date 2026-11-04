@@ -1,0 +1,363 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>時間規劃 | 大學生生存指南</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-content">
+            <h1 class="site-logo">大學生生存指南</h1>
+
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html">首頁</a></li>
+                    <li><a href="courses.html">課程指南</a></li>
+                    <li><a href="resources.html">學習資源</a></li>
+                    <li><a href="planner.html" class="active">時間規劃</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+
+                <h2>時間規劃</h2>
+
+                <p>
+                    合理安排學習與休息時間，
+                    建立適合自己的讀書計畫。
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <h2 class="section-title">為什麼時間管理很重要？</h2>
+
+                <p class="intro-text">
+                    大學生除了需要完成課堂作業與考試，
+                    也可能參與社團、實習、專題研究，
+                    或安排自己的休閒活動。
+                    如果缺乏適當的時間規劃，
+                    很容易發生作業集中在最後一天、
+                    學習效率下降等情況。
+                </p>
+
+                <p class="intro-text">
+                    透過簡單的讀書時間計算工具，
+                    你可以了解自己每週預計投入多少學習時間，
+                    並根據實際情況調整安排。
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Study Time Calculator -->
+        <section class="section section-light">
+            <div class="container">
+
+                <h2 class="section-title">讀書時間計算器</h2>
+
+                <p class="section-description">
+                    輸入每天預計讀書的時間，
+                    以及每週安排的讀書天數，
+                    計算每週總學習時數。
+                </p>
+
+                <div class="calculator-card">
+
+                    <form id="study-form">
+
+                        <!-- Hours Per Day -->
+                        <div class="form-group">
+
+                            <label for="study-hours">
+                                每天讀書時數
+                            </label>
+
+                            <input
+                                type="number"
+                                id="study-hours"
+                                name="study-hours"
+                                min="0.5"
+                                max="24"
+                                step="0.5"
+                                placeholder="例如：2"
+                                required
+                            >
+
+                        </div>
+
+                        <!-- Days Per Week -->
+                        <div class="form-group">
+
+                            <label for="study-days">
+                                每週讀書天數
+                            </label>
+
+                            <select
+                                id="study-days"
+                                name="study-days"
+                                required>
+
+                                <option value="">
+                                    請選擇天數
+                                </option>
+
+                                <option value="1">1 天</option>
+                                <option value="2">2 天</option>
+                                <option value="3">3 天</option>
+                                <option value="4">4 天</option>
+                                <option value="5">5 天</option>
+                                <option value="6">6 天</option>
+                                <option value="7">7 天</option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Buttons -->
+                        <div class="calculator-buttons">
+
+                            <button
+                                type="submit"
+                                class="btn">
+                                計算學習時間
+                            </button>
+
+                            <button
+                                type="reset"
+                                class="btn btn-secondary">
+                                清除資料
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                    <!-- Calculation Result -->
+                    <div
+                        id="study-result"
+                        class="result-box"
+                        aria-live="polite">
+
+                        <h3>計算結果</h3>
+
+                        <p id="result-message">
+                            請輸入資料後按下計算按鈕。
+                        </p>
+
+                        <p
+                            id="result-hours"
+                            class="result-hours">
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Weekly Study Plan -->
+        <section class="section">
+            <div class="container">
+
+                <h2 class="section-title">每週讀書計畫範例</h2>
+
+                <p class="section-description">
+                    以下是一份簡單的讀書計畫，
+                    你可以依照自己的課程與生活安排調整。
+                </p>
+
+                <div class="table-container">
+
+                    <table class="schedule-table">
+
+                        <caption>每週自主學習安排</caption>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">星期</th>
+                                <th scope="col">學習內容</th>
+                                <th scope="col">預計時間</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td>星期一</td>
+                                <td>複習課堂內容</td>
+                                <td>2 小時</td>
+                            </tr>
+
+                            <tr>
+                                <td>星期二</td>
+                                <td>程式設計練習</td>
+                                <td>2 小時</td>
+                            </tr>
+
+                            <tr>
+                                <td>星期三</td>
+                                <td>閱讀與整理筆記</td>
+                                <td>1.5 小時</td>
+                            </tr>
+
+                            <tr>
+                                <td>星期四</td>
+                                <td>專題實作</td>
+                                <td>2 小時</td>
+                            </tr>
+
+                            <tr>
+                                <td>星期五</td>
+                                <td>複習與整理進度</td>
+                                <td>1.5 小時</td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="total-cell">
+                                    每週總計
+                                </td>
+                                <td class="total-cell">
+                                    9 小時
+                                </td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <p class="resource-note">
+                    注意：此表格僅為示範計畫，
+                    不會隨上方計算器的輸入自動更新。
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Time Management Tips -->
+        <section class="section section-light">
+            <div class="container">
+
+                <h2 class="section-title">時間管理小技巧</h2>
+
+                <div class="method-list">
+
+                    <div class="method-item">
+
+                        <h3>1. 優先處理重要任務</h3>
+
+                        <p>
+                            每天開始前先確認需要完成的工作，
+                            將重要或接近截止日期的任務
+                            安排在適合的時間。
+                        </p>
+
+                    </div>
+
+                    <div class="method-item">
+
+                        <h3>2. 將大型任務拆成小步驟</h3>
+
+                        <p>
+                            例如將期末專題拆分成資料蒐集、
+                            程式開發、功能測試與報告整理，
+                            降低一次完成所有工作的壓力。
+                        </p>
+
+                    </div>
+
+                    <div class="method-item">
+
+                        <h3>3. 安排適當休息</h3>
+
+                        <p>
+                            長時間學習時，
+                            可以在不同學習階段之間安排短暫休息，
+                            避免注意力持續下降。
+                        </p>
+
+                    </div>
+
+                    <div class="method-item">
+
+                        <h3>4. 定期檢查計畫</h3>
+
+                        <p>
+                            每週回顧實際完成的學習內容，
+                            並依照課業負擔與個人需求
+                            調整下一週的計畫。
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Navigation to Resources -->
+        <section class="section">
+            <div class="container">
+
+                <div class="resource-action">
+
+                    <h2>讓學習計畫更有效率</h2>
+
+                    <p>
+                        除了安排讀書時間，
+                        也可以搭配適合自己的線上學習資源，
+                        讓每一次學習都有明確的方向。
+                    </p>
+
+                    <a href="resources.html" class="btn">
+                        探索學習資源
+                    </a>
+
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <p>大學生生存指南 | University Survival Guide</p>
+            <p>Web Programming Midterm Project</p>
+
+            <p>
+                <a href="index.html">首頁</a> |
+                <a href="courses.html">課程指南</a> |
+                <a href="resources.html">學習資源</a> |
+                <a href="planner.html">時間規劃</a>
+            </p>
+
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

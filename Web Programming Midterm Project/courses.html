@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>課程指南 | 大學生生存指南</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container header-content">
+            <h1 class="site-logo">大學生生存指南</h1>
+
+            <nav>
+                <ul class="nav-list">
+                    <li><a href="index.html">首頁</a></li>
+                    <li><a href="courses.html" class="active">課程指南</a></li>
+                    <li><a href="resources.html">學習資源</a></li>
+                    <li><a href="planner.html">時間規劃</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- Page Hero -->
+        <section class="page-hero">
+            <div class="container">
+                <h2>課程指南</h2>
+
+                <p>
+                    探索不同領域的課程，
+                    找到適合自己的學習方向。
+                </p>
+            </div>
+        </section>
+
+        <!-- Introduction -->
+        <section class="section">
+            <div class="container">
+
+                <h2 class="section-title">如何選擇適合自己的課程？</h2>
+
+                <p class="intro-text">
+                    大學提供各式各樣的課程，
+                    除了系上必修之外，也有許多選修與跨領域課程。
+                    透過了解課程內容、評估自己的興趣，
+                    可以讓學習更有目標。
+                </p>
+
+                <p class="intro-text">
+                    以下整理六門常見的課程範例，
+                    並依照不同領域分類。
+                    你可以使用分類按鈕，
+                    快速找到自己感興趣的課程。
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Course Filter -->
+        <section class="section section-light">
+            <div class="container">
+
+                <h2 class="section-title">探索課程</h2>
+
+                <p class="section-description">
+                    點選下方分類，篩選不同領域的課程。
+                </p>
+
+                <!-- JavaScript Filter Buttons -->
+                <div class="filter-buttons">
+
+                    <button
+                        type="button"
+                        class="filter-btn active"
+                        data-filter="all">
+                        全部課程
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-filter="programming">
+                        程式設計
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-filter="web">
+                        網頁開發
+                    </button>
+
+                    <button
+                        type="button"
+                        class="filter-btn"
+                        data-filter="data">
+                        資料與分析
+                    </button>
+
+                </div>
+
+                <!-- Course Cards -->
+                <div class="course-grid">
+
+                    <!-- Course 1 -->
+                    <div
+                        class="course-card"
+                        data-category="programming">
+
+                        <span class="course-tag">程式設計</span>
+
+                        <h3>Python 程式設計</h3>
+
+                        <p>
+                            學習變數、條件判斷、迴圈、
+                            函式與基本資料結構，
+                            建立程式設計基礎。
+                        </p>
+
+                        <ul>
+                            <li>Python 基本語法</li>
+                            <li>流程控制</li>
+                            <li>函式與資料結構</li>
+                        </ul>
+
+                    </div>
+
+                    <!-- Course 2 -->
+                    <div
+                        class="course-card"
+                        data-category="programming">
+
+                        <span class="course-tag">程式設計</span>
+
+                        <h3>C++ 程式設計</h3>
+
+                        <p>
+                            了解 C++ 語言的基本概念，
+                            練習演算法與物件導向程式設計。
+                        </p>
+
+                        <ul>
+                            <li>變數與資料型態</li>
+                            <li>函式與類別</li>
+                            <li>基礎演算法</li>
+                        </ul>
+
+                    </div>
+
+                    <!-- Course 3 -->
+                    <div
+                        class="course-card"
+                        data-category="web">
+
+                        <span class="course-tag">網頁開發</span>
+
+                        <h3>HTML 與 CSS</h3>
+
+                        <p>
+                            學習網頁結構與視覺設計，
+                            製作具有導覽列、圖片、
+                            表格與版面配置的網站。
+                        </p>
+
+                        <ul>
+                            <li>HTML 語意化標籤</li>
+                            <li>CSS 排版</li>
+                            <li>響應式設計基礎</li>
+                        </ul>
+
+                    </div>
+
+                    <!-- Course 4 -->
+                    <div
+                        class="course-card"
+                        data-category="web">
+
+                        <span class="course-tag">網頁開發</span>
+
+                        <h3>JavaScript 網頁互動</h3>
+
+                        <p>
+                            透過 JavaScript 操作網頁元素，
+                            實作按鈕互動、內容更新與簡單計算功能。
+                        </p>
+
+                        <ul>
+                            <li>JavaScript 基本語法</li>
+                            <li>DOM 操作</li>
+                            <li>事件處理</li>
+                        </ul>
+
+                    </div>
+
+                    <!-- Course 5 -->
+                    <div
+                        class="course-card"
+                        data-category="data">
+
+                        <span class="course-tag">資料與分析</span>
+
+                        <h3>資料庫系統</h3>
+
+                        <p>
+                            認識關聯式資料庫，
+                            學習資料表設計與 SQL 查詢，
+                            了解資料的儲存與管理方式。
+                        </p>
+
+                        <ul>
+                            <li>關聯式資料庫</li>
+                            <li>SQL 查詢</li>
+                            <li>資料表關聯</li>
+                        </ul>
+
+                    </div>
+
+                    <!-- Course 6 -->
+                    <div
+                        class="course-card"
+                        data-category="data">
+
+                        <span class="course-tag">資料與分析</span>
+
+                        <h3>資料分析入門</h3>
+
+                        <p>
+                            透過資料整理、統計分析與視覺化，
+                            學習如何從資料中發現有用的資訊。
+                        </p>
+
+                        <ul>
+                            <li>資料清理</li>
+                            <li>基本統計</li>
+                            <li>資料視覺化</li>
+                        </ul>
+
+                    </div>
+
+                </div>
+
+                <!-- Filter Result -->
+                <p id="filter-result" class="filter-result" aria-live="polite">
+                    目前顯示全部 6 門課程。
+                </p>
+
+            </div>
+        </section>
+
+        <!-- Course Schedule -->
+        <section class="section">
+            <div class="container">
+
+                <h2 class="section-title">每週課程時間表</h2>
+
+                <p class="section-description">
+                    以下是一份示範課表，
+                    幫助你了解如何使用表格整理課程時間。
+                </p>
+
+                <div class="table-container">
+
+                    <table class="schedule-table">
+
+                        <caption>每週課程安排範例</caption>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">時間</th>
+                                <th scope="col">星期一</th>
+                                <th scope="col">星期二</th>
+                                <th scope="col">星期三</th>
+                                <th scope="col">星期四</th>
+                                <th scope="col">星期五</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <th scope="row">09:00 - 10:00</th>
+                                <td rowspan="2">Python 程式設計</td>
+                                <td>自主學習</td>
+                                <td rowspan="2">資料庫系統</td>
+                                <td>英文</td>
+                                <td>自主學習</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">10:00 - 11:00</th>
+                                <td>自主學習</td>
+                                <td>英文</td>
+                                <td>自主學習</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">11:00 - 12:00</th>
+                                <td>複習</td>
+                                <td>資料分析</td>
+                                <td>複習</td>
+                                <td>專題討論</td>
+                                <td>自主學習</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">12:00 - 13:00</th>
+                                <td colspan="5" class="lunch-cell">
+                                    午餐與休息時間
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">13:00 - 14:00</th>
+                                <td rowspan="2">網頁程式設計</td>
+                                <td>程式練習</td>
+                                <td rowspan="2">C++ 程式設計</td>
+                                <td>專題實作</td>
+                                <td>社團活動</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">14:00 - 15:00</th>
+                                <td>程式練習</td>
+                                <td>專題實作</td>
+                                <td>社團活動</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Course Tips -->
+        <section class="section section-light">
+            <div class="container">
+
+                <h2 class="section-title">選課前的注意事項</h2>
+
+                <ol class="tips-list">
+
+                    <li>
+                        <strong>確認畢業學分：</strong>
+                        先了解必修、選修與通識課程的學分要求。
+                    </li>
+
+                    <li>
+                        <strong>評估課程負擔：</strong>
+                        留意作業、考試、報告與專題的時間需求。
+                    </li>
+
+                    <li>
+                        <strong>搭配個人興趣：</strong>
+                        除了必修課，也可以選擇自己感興趣的領域。
+                    </li>
+
+                    <li>
+                        <strong>安排自主學習：</strong>
+                        保留課後複習與實作練習的時間。
+                    </li>
+
+                </ol>
+
+                <p class="resource-note">
+                    實際選課規定請以各校教務處公告為準。
+                    你也可以參考
+                    <a
+                        href="https://www.ntut.edu.tw/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        國立臺北科技大學官方網站
+                    </a>
+                    取得學校相關資訊。
+                </p>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+
+            <p>大學生生存指南 | University Survival Guide</p>
+            <p>Web Programming Midterm Project</p>
+
+            <p>
+                <a href="index.html">首頁</a> |
+                <a href="courses.html">課程指南</a> |
+                <a href="resources.html">學習資源</a> |
+                <a href="planner.html">時間規劃</a>
+            </p>
+
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
