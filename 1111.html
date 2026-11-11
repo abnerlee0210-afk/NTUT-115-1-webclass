@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Static vs Live Practice</title>
+</head>
+<body>
+
+    <p class="intro">Hello</p>
+    <p class="intro">World</p>
+    <p class="note">Goodbye</p>
+
+    <button onclick="addParagraph()">Add Paragraph</button>
+
+    <p id="result1"></p>
+    <p id="result2"></p>
+
+    <script>
+        // 1. 頁面載入時取得兩個集合
+        const x = document.querySelectorAll(".intro");          // Static (靜態)
+        const y = document.getElementsByClassName("intro");     // Live (動態)
+
+        // 定義一個專門更新顯示數字的函式
+        function updateDisplay() {
+            document.getElementById("result1").innerHTML = "querySelectorAll: " + x.length;
+            document.getElementById("result2").innerHTML = "getElementsByClassName: " + y.length;
+        }
+
+        // 2. 還沒點擊按鈕前先執行一次，預設顯示 2 和 2
+        updateDisplay();
+
+        // 3. 點擊按鈕觸發的函式
+        function addParagraph() {
+            // 動態新增 <p class="intro">
+            const p = document.createElement("p");
+            p.className = "intro";
+            p.innerHTML = "New Paragraph";
+            document.body.appendChild(p);
+
+            // 新增完畢後，再次更新顯示數字 (x 維持 2，y 自動變為 3, 4, 5...)
+            updateDisplay();
+        }
+    </script>
+
+</body>
+</html>
