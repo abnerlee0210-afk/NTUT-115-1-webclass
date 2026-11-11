@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    /* 預設邊框與轉場效果 */
+    .img-box {
+      border: 3px solid transparent;
+      margin-top: 10px;
+    }
+    /* 點擊 Add Border 後切換此樣式 */
+    .has-border {
+      border: 3px solid black;
+    }
+    /* 點擊 Change Color 後切換此文字顏色 */
+    .blue-text {
+      color: blue;
+    }
+  </style>
+</head>
+<body>
+
+  <ul>
+    <li>Hello!</li>
+  </ul>
+  
+  <p id="sub-title">Nice to meet you!</p>
+
+  <!-- 圖片 -->
+  <img id="my-img" class="img-box" src="https://upload.wikimedia.org/wikipedia/en/7/7d/Lenna_%28test_image%29.png" width="200" alt="Lenna">
+  
+  <br><br>
+
+  <!-- 功能按鈕 -->
+  <button type="button" onclick="addBorder()">Add Border</button>
+  <button type="button" onclick="changeColor()">Change Color</button>
+
+  <script>
+    // 加黑框功能
+    function addBorder() {
+      document.getElementById('my-img').classList.toggle('has-border');
+    }
+
+    // 變更文字顏色功能
+    function changeColor() {
+      document.getElementById('sub-title').classList.toggle('blue-text');
+    }
+  </script>
+
+</body>
+</html>

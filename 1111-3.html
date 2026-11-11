@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Canvas Example 01</title>
+</head>
+<body>
+
+  <!-- 建立畫布與邊框 -->
+  <canvas id="myCanvas" width="250" height="150" style="border:1px solid #000000;"></canvas>
+
+  <script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+
+    // 1. 繪製紅色矩形 (不透明度 100%)
+    ctx.fillStyle = "rgb(255, 0, 0)";
+    ctx.fillRect(0, 0, 120, 75);
+
+    // 2. 繪製藍色半透明矩形 (Alpha 設定為 0.5，產生重疊紫色的效果)
+    ctx.fillStyle = "rgba(0, 0, 255, 0.5)";
+    ctx.fillRect(40, 30, 120, 75);
+  </script>
+
+</body>
+</html>
