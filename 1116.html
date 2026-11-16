@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>ARC STUDY - Canvas Geometry</title>
+    <style>
+        body {
+            background-color: #e5e5e5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        canvas {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            background-color: #f4f1ea;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="arcPoster" width="600" height="760"></canvas>
+
+    <script>
+        const canvas = document.getElementById("arcPoster");
+        const ctx = canvas.getContext("2d");
+
+        // 1. 整體海報米白底色
+        ctx.fillStyle = "#f4f1ea";
+        ctx.fillRect(0, 0, 600, 760);
+
+        // 2. 頂部標題文字
+        ctx.fillStyle = "#4a5d54";
+        ctx.font = "bold 11px Arial";
+        ctx.fillText("FORM / COLOUR / ANGLE", 40, 45);
+
+        ctx.fillStyle = "#1f423a";
+        ctx.font = "bold 46px Arial";
+        ctx.fillText("ARC STUDY", 38, 95);
+
+        ctx.fillStyle = "#4a5d54";
+        ctx.font = "14px Arial";
+        ctx.fillText("One circle. Many possibilities.", 40, 122);
+
+        // 定義四個區塊的基準座標 (x, y) 與寬高
+        const startX = 40;
+        const startY = 145;
+        const boxW = 260;
+        const boxH = 260;
+
+        // ================= 區塊 01: HALF CIRCLE / 180° =================
+        let x1 = startX;
+        let y1 = startY;
+        ctx.fillStyle = "#ecc5a8"; // 淺杏色背景
+        ctx.fillRect(x1, y1, boxW, boxH);
+
+        // 紅棕色上半圓 (180度: Math.PI 到 0)
+        ctx.beginPath();
+        ctx.fillStyle = "#a84b35";
+        ctx.arc(x1 + 130, y1 + 145, 80, Math.PI, 0, false);
+        ctx.fill();
+
+        // 下方水平細線
+        ctx.beginPath();
+        ctx.strokeStyle = "#a84b35";
+        ctx.lineWidth = 2.5;
+        ctx.moveTo(x1 + 50, y1 + 162);
+        ctx.lineTo(x1 + 210, y1 + 162);
+        ctx.stroke();
+
+        // 區塊 01 標籤
+        ctx.fillStyle = "#7a3b2c";
+        ctx.font = "bold 10px Arial";
+        ctx.fillText("01 / HALF CIRCLE / 180°", x1 + 18, y1 + 242);
+
+
+        // ================= 區塊 02: QUARTER SECTORS / 90° =================
+        let x2 = startX + boxW;
+        let y2 = startY;
+        ctx.fillStyle = "#1f423a"; // 深墨綠色背景
+        ctx.fillRect(x2, y2, boxW, boxH);
+
+        // 米黃色大扇形 (圓心在左上內側，0 到 0.5*PI)
+        ctx.beginPath();
+        ctx.fillStyle = "#f2d694";
+        ctx.moveTo(x2 + 45, y2 + 45);
+        ctx.arc(x2 + 45, y2 + 45, 165, 0, 0.5 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+
+        // 珊瑚粉小扇形 (圓心在右下內側，PI 到 1.5*PI)
+        ctx.beginPath();
+        ctx.fillStyle = "#df8568";
+        ctx.moveTo(x2 + 215, y2 + 210);
+        ctx.arc(x2 + 215, y2 + 210, 65, Math.PI, 1.5 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+
+        // 區塊 02 標籤
+        ctx.fillStyle = "#d9e2de";
+        ctx.font = "bold 10px Arial";
+        ctx.fillText("02 / QUARTER SECTORS / 90°", x2 + 18, y2 + 242);
+
+
+        // ================= 區塊 03: THREE QUARTERS / 270° =================
+        let x3 = startX;
+        let y3 = startY + boxH;
+        ctx.fillStyle = "#d6826b"; // 磚橘色背景
+        ctx.fillRect(x3, y3, boxW, boxH);
+
+        // 大米白色 270度 扇形 (0 到 1.5*PI)
+        let cx3 = x3 + 125;
+        let cy3 = y3 + 125;
+        ctx.beginPath();
+        ctx.fillStyle = "#f4efe6";
+        ctx.moveTo(cx3, cy3);
+        ctx.arc(cx3, cy3, 85, 0, 1.5 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+
+        // 右上深棕色 90度 小扇形 (1.5*PI 到 2*PI)
+        ctx.beginPath();
+        ctx.fillStyle = "#7a3b2c";
+        ctx.moveTo(cx3 + 8, cy3 - 8);
+        ctx.arc(cx3 + 8, cy3 - 8, 52, 1.5 * Math.PI, 2 * Math.PI, false);
+        ctx.closePath();
+        ctx.fill();
+
+        // 區塊 03 標籤
+        ctx.fillStyle = "#6e3224";
+        ctx.font = "bold 10px Arial";
+        ctx.fillText("03 / THREE QUARTERS / 270°", x3 + 18, y3 + 242);
+
+
+        // ================= 區塊 04: OPEN ARCS / 120° =================
+        let x4 = startX + boxW;
+        let y4 = startY + boxH;
+        ctx.fillStyle = "#e6d8bd"; // 暖卡其色背景
+        ctx.fillRect(x4, y4, boxW, boxH);
+
+        let cx4 = x4 + 130;
+        let cy4 = y4 + 185;
+        // 120度弧度換算：以正上方 1.5*PI 為中心，左右各 60度 (PI/3)
+        let startAngle = 1.5 * Math.PI - (Math.PI / 3);
+        let endAngle   = 1.5 * Math.PI + (Math.PI / 3);
+
+        // 外圈深綠色粗圓弧
+        ctx.beginPath();
+        ctx.strokeStyle = "#1f423a";
+        ctx.lineWidth = 18;
+        ctx.arc(cx4, cy4, 90, startAngle, endAngle, false);
+        ctx.stroke();
+
+        // 內圈紅棕色中圓弧
+        ctx.beginPath();
+        ctx.strokeStyle = "#b54b35";
+        ctx.lineWidth = 12;
+        ctx.arc(cx4, cy4, 60, startAngle, endAngle, false);
+        ctx.stroke();
+
+        // 區塊 04 標籤
+        ctx.fillStyle = "#3a4d45";
+        ctx.font = "bold 10px Arial";
+        ctx.fillText("04 / OPEN ARCS / 120°", x4 + 18, y4 + 242);
+
+
+        // ================= 底部頁尾文字 =================
+        ctx.fillStyle = "#1f423a";
+        ctx.font = "bold 13px Arial";
+        ctx.fillText("CIRCULAR THINKING", 40, 705);
+
+        ctx.fillStyle = "#5c6e66";
+        ctx.font = "13px Arial";
+        ctx.fillText("Canvas geometry / beginPath · arc · fill · stroke", 40, 728);
+    </script>
+
+</body>
+</html>
