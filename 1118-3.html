@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Hour - Canvas Analog Clock</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: radial-gradient(circle at 30% 40%, #1c2d3d 0%, #0d161f 100%);
+            color: #eef2f5;
+            font-family: "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            gap: 70px;
+            max-width: 960px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        canvas {
+            border-radius: 50%;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+        }
+
+        .info-panel {
+            max-width: 420px;
+        }
+
+        h1 {
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: 52px;
+            margin: 0 0 10px 0;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .subtitle {
+            color: #9fb0bf;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        button {
+            padding: 8px 16px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            border: 1px solid #455666;
+            background-color: #162330;
+            color: #cbd5e0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            border-color: #e6c280;
+        }
+
+        button.active {
+            background-color: #e6c280;
+            color: #131e29;
+            border-color: #e6c280;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #2b3c4d;
+            margin-bottom: 22px;
+        }
+
+        h2 {
+            font-family: Georgia, serif;
+            font-size: 20px;
+            font-weight: normal;
+            margin: 0 0 14px 0;
+        }
+
+        ol {
+            padding-left: 20px;
+            margin: 0;
+            color: #b8c6d4;
+            font-size: 13.5px;
+            line-height: 1.65;
+        }
+
+        li {
+            margin-bottom: 12px;
+        }
+
+        li strong {
+            color: #ffffff;
+        }
+
+        code {
+            font-family: monospace;
+            color: #e6c280;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- 左側：Canvas 時鐘 -->
+    <canvas id="blueHourClock" width="380" height="380"></canvas>
+
+    <!-- 右側：標題、切換按鈕與題目說明 -->
+    <div class="info-panel">
+        <h1>Blue Hour</h1>
+        <div class="subtitle">Draw an analog clock in HTML Canvas.</div>
+
+        <div class="controls">
+            <button id="btnSample" onclick="setMode('sample')">Sample · 10:08:37</button>
+            <button id="btnLive" class="active" onclick="setMode('live')">Live time</button>
+        </div>
+
+        <hr>
+
+        <h2>Canvas exercise</h2>
+        <ol>
+            <li><strong>Draw the face.</strong> Use <code>arc()</code> and a radial gradient for the dial. Place Roman numerals at the four quarter hours.</li>
+            <li><strong>Draw 60 tick marks.</strong> Give every fifth mark extra length and weight. Keep the 48 marks between hours short and thin.</li>
+            <li><strong>Shape three hands.</strong> Draw a wide, faceted polygon for the hour hand and a narrower, longer polygon for the minute hand. Give the thin second hand a round counterweight.</li>
+            <li><strong>Make it run.</strong> Check your angles at 10:08:37, then draw the local time once a second. Show the same time as <code>HH:MM:SS</code> on the dial.</li>
+        </ol>
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById("blueHourClock");
+    const ctx = canvas.getContext("2d");
+    const radius = canvas.height / 2;
+    ctx.translate(radius, radius); // 將原點移至中心
+
+    let mode = "live"; // 預設為即時時間模式 ('live' 或 'sample')
+
+    function setMode(newMode) {
+        mode = newMode;
+        document.getElementById("btnSample").classList.toggle("active", mode === "sample");
+        document.getElementById("btnLive").classList.toggle("active", mode === "live");
+        drawClock();
+    }
+
+    function drawClock() {
+        const R = radius * 0.92;
+        drawFace(ctx, R);
+        drawTicks(ctx, R);
+        drawNumerals(ctx, R);
+
+        // 決定顯示時間：Sample 10:08:37 或系統當前時間
+        let hour, minute, second;
+        if (mode === "sample") {
+            hour = 10;
+            minute = 8;
+            second = 37;
+        } else {
+            const now = new Date();
+            hour = now.getHours();
+            minute = now.getMinutes();
+            second = now.getSeconds();
+        }
+
+        drawDigitalBox(ctx, R, hour, minute, second);
+        drawHands(ctx, R, hour, minute, second);
+    }
+
+    // 1. 繪製深藍漸層錶面與古銅金立體外框
+    function drawFace(ctx, R) {
+        // 錶盤深藍放射漸層
+        const dialGrad = ctx.createRadialGradient(0, -R * 0.2, R * 0.1, 0, 0, R);
+        dialGrad.addColorStop(0, "#243b52");
+        dialGrad.addColorStop(1, "#0f1b26");
+
+        ctx.beginPath();
+        ctx.arc(0, 0, R, 0, 2 * Math.PI);
+        ctx.fillStyle = dialGrad;
+        ctx.fill();
+
+        // 古銅金色立體金屬邊框
+        const rimGrad = ctx.createRadialGradient(0, 0, R * 0.94, 0, 0, R * 1.04);
+        rimGrad.addColorStop(0, "#7a5c3c");
+        rimGrad.addColorStop(0.5, "#e6c280");
+        rimGrad.addColorStop(1, "#5c4328");
+
+        ctx.strokeStyle = rimGrad;
+        ctx.lineWidth = R * 0.065;
+        ctx.stroke();
+
+        // 內圈細微裝飾線
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 0.92, 0, 2 * Math.PI);
+        ctx.strokeStyle = "rgba(230, 194, 128, 0.25)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    }
+
+    // 2. 繪製 60 個刻度（每 5 格加長加粗）
+    function drawTicks(ctx, R) {
+        for (let i = 0; i < 60; i++) {
+            const ang = (i * Math.PI) / 30;
+            const isMajor = (i % 5 === 0);
+
+            ctx.save();
+            ctx.rotate(ang);
+            ctx.beginPath();
+            ctx.strokeStyle = isMajor ? "#f2e6d0" : "rgba(242, 230, 208, 0.45)";
+            ctx.lineWidth = isMajor ? 2.4 : 1;
+
+            const outerR = R * 0.89;
+            const innerR = isMajor ? R * 0.81 : R * 0.85;
+            ctx.moveTo(0, -innerR);
+            ctx.lineTo(0, -outerR);
+            ctx.stroke();
+            ctx.restore();
+        }
+    }
+
+    // 1b. 四個主方位羅馬數字 (XII, III, VI, IX)
+    function drawNumerals(ctx, R) {
+        const numerals = [
+            { text: "XII", ang: 0 },
+            { text: "III", ang: Math.PI / 2 },
+            { text: "VI",  ang: Math.PI },
+            { text: "IX",  ang: (3 * Math.PI) / 2 }
+        ];
+
+        ctx.font = `bold ${Math.round(R * 0.11)}px Georgia, serif`;
+        ctx.fillStyle = "#e6dcc8";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        for (let item of numerals) {
+            const dist = R * 0.69;
+            const x = Math.sin(item.ang) * dist;
+            const y = -Math.cos(item.ang) * dist;
+            ctx.fillText(item.text, x, y);
+        }
+    }
+
+    // 4b. 錶盤下方數位時間顯示視窗 (HH:MM:SS)
+    function drawDigitalBox(ctx, R, h, m, s) {
+            const pad = (n) => String(n).padStart(2, "0");
+            const timeStr = `${pad(h)}:${pad(m)}:${pad(s)}`;
+
+            const boxW = R * 0.56;
+            const boxH = R * 0.16;
+            const boxY = R * 0.30;
+
+            ctx.save();
+            // 繪製深色半透明底框與金色細邊框
+            ctx.fillStyle = "rgba(10, 18, 26, 0.75)";
+            ctx.strokeStyle = "rgba(230, 194, 128, 0.35)";
+            ctx.lineWidth = 1;
+            ctx.fillRect(-boxW / 2, boxY, boxW, boxH);
+            ctx.strokeRect(-boxW / 2, boxY, boxW, boxH);
+
+            // 繪製 HH:MM:SS 數位時間文字
+            ctx.fillStyle = "#e6dcc8";
+            ctx.font = `bold ${Math.round(R * 0.085)}px "Courier New", monospace`;
+            ctx.textAlign = "center";
+            ctx.textBaseline = "middle";
+            ctx.fillText(timeStr, 0, boxY + boxH / 2 + 1);
+            ctx.restore();
+        }
+
+    // 3. 繪製多邊形時針、分針與帶圓環配重的秒針
+    function drawHands(ctx, R, hour, minute, second) {
+        const h12 = hour % 12;
+        const hourAng = (h12 * Math.PI) / 6 + (minute * Math.PI) / (6 * 60) + (second * Math.PI) / (360 * 60);
+        const minAng  = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
+        const secAng  = (second * Math.PI) / 30;
+
+        // 時針：古銅金寬版劍形多邊形
+        drawPolygonHand(ctx, hourAng, R * 0.50, R * 0.055, "#d9a760", "#b3803b");
+
+        // 分針：銀白窄長劍形多邊形
+        drawPolygonHand(ctx, minAng, R * 0.74, R * 0.036, "#f5f7fa", "#cbd5e0");
+
+        // 秒針：珊瑚紅細針 + 尾部圓形配重
+        ctx.save();
+        ctx.rotate(secAng);
+        ctx.strokeStyle = "#d96b52";
+        ctx.fillStyle = "#162432";
+        ctx.lineWidth = 1.6;
+
+        // 主針身（從尾部到針尖）
+        ctx.beginPath();
+        ctx.moveTo(0, R * 0.14);
+        ctx.lineTo(0, -R * 0.82);
+        ctx.stroke();
+
+        // 尾部圓環配重
+        ctx.beginPath();
+        ctx.arc(0, R * 0.17, R * 0.035, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.stroke();
+        ctx.restore();
+
+        // 正中央雙層金屬軸心
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 0.045, 0, 2 * Math.PI);
+        ctx.fillStyle = "#e6c280";
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(0, 0, R * 0.02, 0, 2 * Math.PI);
+        ctx.fillStyle = "#131e29";
+        ctx.fill();
+    }
+
+    // 輔助函式：繪製左右雙切面劍形多邊形指針
+    function drawPolygonHand(ctx, angle, length, halfWidth, lightColor, darkColor) {
+        ctx.save();
+        ctx.rotate(angle);
+
+        // 左半切面（亮面）
+        ctx.beginPath();
+        ctx.moveTo(0, length * 0.16);
+        ctx.lineTo(-halfWidth, 0);
+        ctx.lineTo(0, -length);
+        ctx.closePath();
+        ctx.fillStyle = lightColor;
+        ctx.fill();
+
+        // 右半切面（暗面，營造立體稜線感）
+        ctx.beginPath();
+        ctx.moveTo(0, length * 0.16);
+        ctx.lineTo(halfWidth, 0);
+        ctx.lineTo(0, -length);
+        ctx.closePath();
+        ctx.fillStyle = darkColor;
+        ctx.fill();
+
+        ctx.restore();
+    }
+
+    // 啟動計時器（每秒更新一次）
+    drawClock();
+    setInterval(() => {
+        if (mode === "live") {
+            drawClock();
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>
