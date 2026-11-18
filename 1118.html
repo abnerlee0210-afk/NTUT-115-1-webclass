@@ -22,7 +22,7 @@
 
         /* 按鈕控制區 */
         .controls {
-            margin-bottom: 25px;
+            margin-top: 25px;
             display: flex;
             gap: 15px;
         }
@@ -51,9 +51,7 @@
 
         /* 畫布外框 */
         canvas {
-            border: 2px solid #2c3330;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 8px 20px rgba(167, 86, 86, 0.12);
         }
 
         /* 預設隱藏的第二個畫布 */
@@ -66,15 +64,17 @@
 
     <h2>SUN & MOONS</h2>
 
+    <!-- 兩個獨立的 Canvas -->
+    <canvas id="sunCanvas" width="400" height="300"></canvas>
+    <canvas id="moonsCanvas" width="400" height="300" class="hidden"></canvas>
+
     <!-- 兩個切換按鈕 -->
     <div class="controls">
         <button id="btnSun" class="active" onclick="showSun()">Show Sun</button>
         <button id="btnMoons" onclick="showMoons()">Show Moons</button>
     </div>
 
-    <!-- 兩個獨立的 Canvas -->
-    <canvas id="sunCanvas" width="400" height="300"></canvas>
-    <canvas id="moonsCanvas" width="400" height="300" class="hidden"></canvas>
+
 
     <script>
         // ================= 1. 繪製 SUN 畫布 =================
