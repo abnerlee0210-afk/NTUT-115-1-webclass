@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARC STUDY - 4 Canvases Switcher</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f1ea;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            color: #1f423a;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        /* 畫布容器 */
+        .canvas-box {
+            margin-bottom: 24px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        /* 隱藏未選中的畫布 */
+        canvas.hidden {
+            display: none;
+        }
+
+        /* 畫布底下的四個按鈕 */
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 16px;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+            border: 2px solid #1f423a;
+            background-color: #ffffff;
+            color: #1f423a;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        button:hover {
+            background-color: #e6e2d8;
+        }
+
+        /* 選中按鈕的高亮狀態 */
+        button.active {
+            background-color: #1f423a;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>ARC STUDY</h2>
+
+    <!-- 上方：四個獨立的 Canvas (各 300x300) -->
+    <div class="canvas-box">
+        <canvas id="canvas1" width="300" height="300"></canvas>
+        <canvas id="canvas2" width="300" height="300" class="hidden"></canvas>
+        <canvas id="canvas3" width="300" height="300" class="hidden"></canvas>
+        <canvas id="canvas4" width="300" height="300" class="hidden"></canvas>
+    </div>
+
+    <!-- 下方：四個對應切換按鈕 -->
+    <div class="controls">
+        <button id="btn1" class="active" onclick="showCanvas(1)">01 / HALF CIRCLE</button>
+        <button id="btn2" onclick="showCanvas(2)">02 / QUARTER SECTORS</button>
+        <button id="btn3" onclick="showCanvas(3)">03 / THREE QUARTERS</button>
+        <button id="btn4" onclick="showCanvas(4)">04 / OPEN ARCS</button>
+    </div>
+
+    <script>
+        // ================= 01 / HALF CIRCLE / 180° =================
+        function drawCanvas1() {
+            const ctx = document.getElementById("canvas1").getContext("2d");
+
+            // 淺杏色背景
+            ctx.fillStyle = "#ecc5a8";
+            ctx.fillRect(0, 0, 300, 300);
+
+            // 紅棕色上半圓 (180°: Math.PI 到 0)
+            ctx.beginPath();
+            ctx.fillStyle = "#a84b35";
+            ctx.arc(150, 165, 92, Math.PI, 0, false);
+            ctx.fill();
+
+            // 下方水平直線
+            ctx.beginPath();
+            ctx.strokeStyle = "#a84b35";
+            ctx.lineWidth = 3;
+            ctx.moveTo(58, 185);
+            ctx.lineTo(242, 185);
+            ctx.stroke();
+
+            // 左下角文字標籤
+            ctx.fillStyle = "#7a3b2c";
+            ctx.font = "bold 11px Arial";
+            ctx.fillText("01 / HALF CIRCLE / 180°", 20, 280);
+        }
+
+        // ================= 02 / QUARTER SECTORS / 90° =================
+        function drawCanvas2() {
+            const ctx = document.getElementById("canvas2").getContext("2d");
+
+            // 深墨綠色背景
+            ctx.fillStyle = "#1f423a";
+            ctx.fillRect(0, 0, 300, 300);
+
+            // 米黃色大扇形 (0 到 0.5*PI)
+            ctx.beginPath();
+            ctx.fillStyle = "#f2d694";
+            ctx.moveTo(52, 52);
+            ctx.arc(52, 52, 190, 0, 0.5 * Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+
+            // 珊瑚粉小扇形 (PI 到 1.5*PI)
+            ctx.beginPath();
+            ctx.fillStyle = "#df8568";
+            ctx.moveTo(248, 242);
+            ctx.arc(248, 242, 75, Math.PI, 1.5 * Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+
+            // 左下角文字標籤
+            ctx.fillStyle = "#d9e2de";
+            ctx.font = "bold 11px Arial";
+            ctx.fillText("02 / QUARTER SECTORS / 90°", 20, 280);
+        }
+
+        // ================= 03 / THREE QUARTERS / 270° =================
+        function drawCanvas3() {
+            const ctx = document.getElementById("canvas3").getContext("2d");
+
+            // 磚橘色背景
+            ctx.fillStyle = "#d6826b";
+            ctx.fillRect(0, 0, 300, 300);
+
+            const cx = 144;
+            const cy = 145;
+
+            // 大米白色 270度 扇形 (0 到 1.5*PI)
+            ctx.beginPath();
+            ctx.fillStyle = "#f4efe6";
+            ctx.moveTo(cx, cy);
+            ctx.arc(cx, cy, 98, 0, 1.5 * Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+
+            // 右上深棕色 90度 小扇形 (1.5*PI 到 2*PI)
+            ctx.beginPath();
+            ctx.fillStyle = "#7a3b2c";
+            ctx.moveTo(cx + 9, cy - 9);
+            ctx.arc(cx + 9, cy - 9, 60, 1.5 * Math.PI, 2 * Math.PI, false);
+            ctx.closePath();
+            ctx.fill();
+
+            // 左下角文字標籤
+            ctx.fillStyle = "#6e3224";
+            ctx.font = "bold 11px Arial";
+            ctx.fillText("03 / THREE QUARTERS / 270°", 20, 280);
+        }
+
+        // ================= 04 / OPEN ARCS / 120° =================
+        function drawCanvas4() {
+            const ctx = document.getElementById("canvas4").getContext("2d");
+
+            // 暖卡其色背景
+            ctx.fillStyle = "#e6d8bd";
+            ctx.fillRect(0, 0, 300, 300);
+
+            const cx = 150;
+            const cy = 215;
+            // 120度弧度：以正上方 1.5*PI 為中心，左右各 PI/3 (60度)
+            const startAngle = 1.5 * Math.PI - (Math.PI / 3);
+            const endAngle   = 1.5 * Math.PI + (Math.PI / 3);
+
+            // 外圈深綠色粗圓弧
+            ctx.beginPath();
+            ctx.strokeStyle = "#1f423a";
+            ctx.lineWidth = 20;
+            ctx.arc(cx, cy, 105, startAngle, endAngle, false);
+            ctx.stroke();
+
+            // 內圈紅棕色中圓弧
+            ctx.beginPath();
+            ctx.strokeStyle = "#b54b35";
+            ctx.lineWidth = 14;
+            ctx.arc(cx, cy, 70, startAngle, endAngle, false);
+            ctx.stroke();
+
+            // 左下角文字標籤
+            ctx.fillStyle = "#3a4d45";
+            ctx.font = "bold 11px Arial";
+            ctx.fillText("04 / OPEN ARCS / 120°", 20, 280);
+        }
+
+        // ================= 按鈕切換函式 =================
+        function showCanvas(index) {
+            for (let i = 1; i <= 4; i++) {
+                const canvas = document.getElementById("canvas" + i);
+                const btn = document.getElementById("btn" + i);
+
+                if (i === index) {
+                    canvas.classList.remove("hidden");
+                    btn.classList.add("active");
+                } else {
+                    canvas.classList.add("hidden");
+                    btn.classList.remove("active");
+                }
+            }
+        }
+
+        // 初始化繪製四個畫布
+        drawCanvas1();
+        drawCanvas2();
+        drawCanvas3();
+        drawCanvas4();
+    </script>
+
+</body>
+</html>

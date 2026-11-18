@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas Practice - Sun & Moons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f1ea;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            color: #222;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* 按鈕控制區 */
+        .controls {
+            margin-bottom: 25px;
+            display: flex;
+            gap: 15px;
+        }
+
+        button {
+            padding: 10px 24px;
+            font-size: 14px;
+            font-weight: bold;
+            border: 2px solid #2c3330;
+            background-color: #ffffff;
+            color: #2c3330;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.25s;
+        }
+
+        button:hover {
+            background-color: #e8e4dc;
+        }
+
+        /* 目前選中按鈕的樣式 */
+        button.active {
+            background-color: #2c3330;
+            color: #ffffff;
+        }
+
+        /* 畫布外框 */
+        canvas {
+            border: 2px solid #2c3330;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        /* 預設隱藏的第二個畫布 */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>SUN & MOONS</h2>
+
+    <!-- 兩個切換按鈕 -->
+    <div class="controls">
+        <button id="btnSun" class="active" onclick="showSun()">Show Sun</button>
+        <button id="btnMoons" onclick="showMoons()">Show Moons</button>
+    </div>
+
+    <!-- 兩個獨立的 Canvas -->
+    <canvas id="sunCanvas" width="400" height="300"></canvas>
+    <canvas id="moonsCanvas" width="400" height="300" class="hidden"></canvas>
+
+    <script>
+        // ================= 1. 繪製 SUN 畫布 =================
+        function drawSun() {
+            const canvas = document.getElementById("sunCanvas");
+            const ctx = canvas.getContext("2d");
+
+            // 天空漸層背景
+            const skyGrd = ctx.createLinearGradient(0, 0, 0, 300);
+            skyGrd.addColorStop(0, "#4a90e2");
+            skyGrd.addColorStop(1, "#ffecd2");
+            ctx.fillStyle = skyGrd;
+            ctx.fillRect(0, 0, 400, 300);
+
+            // 太陽本體 (漸層圓形)
+            const sunGrd = ctx.createLinearGradient(150, 80, 250, 200);
+            sunGrd.addColorStop(0, "#ff512f");
+            sunGrd.addColorStop(1, "#f09819");
+
+            ctx.beginPath();
+            ctx.fillStyle = sunGrd;
+            ctx.arc(200, 140, 55, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 太陽光芒 (使用三角函數計算周圍 12 條放射線)
+            ctx.strokeStyle = "#f09819";
+            ctx.lineWidth = 4;
+            for (let i = 0; i < 12; i++) {
+                const angle = (i * Math.PI) / 6;
+                const x1 = 200 + Math.cos(angle) * 68;
+                const y1 = 140 + Math.sin(angle) * 68;
+                const x2 = 200 + Math.cos(angle) * 88;
+                const y2 = 140 + Math.sin(angle) * 88;
+
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+            }
+
+            // 標題文字
+            ctx.fillStyle = "#2c3330";
+            ctx.font = "bold 16px Arial";
+            ctx.fillText("DAYTIME · THE SUN", 125, 270);
+        }
+
+        // ================= 2. 繪製 MOONS 畫布 =================
+        function drawMoons() {
+            const canvas = document.getElementById("moonsCanvas");
+            const ctx = canvas.getContext("2d");
+
+            // 夜空深藍漸層背景
+            const nightGrd = ctx.createLinearGradient(0, 0, 0, 300);
+            nightGrd.addColorStop(0, "#0f2027");
+            nightGrd.addColorStop(1, "#203a43");
+            ctx.fillStyle = nightGrd;
+            ctx.fillRect(0, 0, 400, 300);
+
+            // 滿月 (左側：完整圓形)
+            ctx.beginPath();
+            ctx.fillStyle = "#f2d694";
+            ctx.arc(125, 140, 45, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 新月/彎月 (右側：利用底色圓形遮罩疊出彎月效果)
+            ctx.beginPath();
+            ctx.fillStyle = "#f2d694";
+            ctx.arc(275, 140, 45, 0, Math.PI * 2);
+            ctx.fill();
+
+            ctx.beginPath();
+            ctx.fillStyle = "#182d35"; // 與該高度夜空相近的深色遮罩
+            ctx.arc(293, 130, 40, 0, Math.PI * 2);
+            ctx.fill();
+
+            // 幾顆小星星
+            ctx.fillStyle = "#ffffff";
+            const stars = [[60, 50], [190, 60], [340, 55], [200, 195], [80, 210]];
+            for (let s of stars) {
+                ctx.beginPath();
+                ctx.arc(s[0], s[1], 2.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            // 標題文字
+            ctx.fillStyle = "#f2d694";
+            ctx.font = "bold 16px Arial";
+            ctx.fillText("NIGHTTIME · PHASES OF THE MOON", 65, 270);
+        }
+
+        // ================= 3. 按鈕切換控制邏輯 =================
+        const sunCanvas = document.getElementById("sunCanvas");
+        const moonsCanvas = document.getElementById("moonsCanvas");
+        const btnSun = document.getElementById("btnSun");
+        const btnMoons = document.getElementById("btnMoons");
+
+        function showSun() {
+            sunCanvas.classList.remove("hidden");
+            moonsCanvas.classList.add("hidden");
+            btnSun.classList.add("active");
+            btnMoons.classList.remove("active");
+        }
+
+        function showMoons() {
+            moonsCanvas.classList.remove("hidden");
+            sunCanvas.classList.add("hidden");
+            btnMoons.classList.add("active");
+            btnSun.classList.remove("active");
+        }
+
+        // 頁面載入時先將兩個畫布都畫好
+        drawSun();
+        drawMoons();
+    </script>
+
+</body>
+</html>
